@@ -2,14 +2,14 @@
 
 This is a simple Flask web application that generates secure passwords and checks their strength. The app includes functionality to view and manage a history of generated passwords.
 
-## Features
+## Features ✒️✒️
 
 - Generate passwords with customizable options (length, uppercase, lowercase, numbers, symbols).
 - Check the strength of a given password.
 - View the history of generated passwords.
 - Clear the password history.
 
-## Technologies Used
+## Technologies Used 💻
 
 - Python
 - Flask
