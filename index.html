@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator and Checker</title>
+    <style>
+        /* Main body and background */
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to top, #1e6dbc, #199898, #12af12);
+            background-size: 400% 400%;
+            animation: gradient-animation 10s ease infinite;
+            background-size: cover;
+            color: #32b725;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Styling for the form container */
+        .form-container {
+            background-color: rgb(2 36 18 / 70%);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg,#396eb7, #7dddbd, #0c781e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            position: relative;
+            animation: fadeIn 5s ease-in-out;
+        }
+        LengthPass{
+            border: 2px solid green;
+            backgroundcolor: green;
+          }
+
+        label {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #7dc66e;
+        }
+
+        input[type="number"] {
+            width: 80px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #4CAF50; /* Green background */
+            color: white; /* Text color */
+        }
+        
+
+        input[type="checkbox"] {
+            margin-right: 8px;
+            color : green; s
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button {
+            background: linear-gradient(90deg,  #2766b1, #31b6a6, #18a828);
+            color: #fff;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        button:hover {
+            background-color: #3e8e41;
+            transform: scale(1.05);
+        }
+
+        .toggle-button {
+            background-color: red;
+            font-size: 14px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .toggle-button:hover {
+            background-color: darkred;
+            transform: scale(1.05);
+        }
+
+        /* Password section */
+        #password {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        /* Checkbox styling: switches */
+        .checkbox-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            
+        }
+
+        /* Modal for password strength */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0, 0, 0, 0.7);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #1c1c1c;
+            color: #fff;
+            margin: 5% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+            border-radius: 10px;
+            animation: slideIn 0.5s ease-in-out;
+            position: relative;
+        }
+
+        /* Modal close button */
+        .close {
+            color: #fff;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .close:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+
+        }
+
+        @keyframes gradient-animation {
+            0% {
+              background-position:   
+           0% 0%;
+            }
+            50% {
+              background-position: 100% 100%;
+            }
+            100% {
+              background-position: 0%   
+           0%;
+            }
+          }
+        
+    </style>
+
+
+</head>
+<body>
+    <div class="form-container">
+        <h1>Password Generator and Checker </h1>
+        <div class="LengthPass"> 
+
+            <label for="length">Password Length:</label>
+            <input type="number" id="length" value="12" min="1" max="128">
+        </div>
+
+        <div class="checkbox-container">
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="uppercase" checked>
+                <label for="uppercase">Uppercase</label>
+            </div>
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="lowercase" checked>
+                <label for="lowercase">Lowercase</label>
+            </div>
+           
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="numbers" checked>
+                <label for="numbers">Numbers</label>
+            </div>
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="symbols" checked>
+                <label for="symbols">Symbols</label>
+            </div>
+            <div class="checkbox-wrapper">
+                <button class="toggle-button" onclick="toggleCheckboxes()">Toggle</button>
+            </div>
+        </div>
+
+        <button onclick="generatePassword()">Generate Password</button>
+        <button onclick="viewPasswordHistory()">View Password History</button>
+        <button onclick="clearPasswordHistory()">Clear History</button>
+        <button onclick="promptCheckPassword()">Check Your Password</button>
+
+        <h2>Generated Password And Checker:</h2>
+        <p id="password"></p>
+
+        <div class="result" id="result"></div>
+        <div class="history" id="history"></div>
+    </div>
+
+    <!-- Modal for password strength -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Password Strength</h2>
+            <p id="modalResult"></p>
+        </div>
+    </div>
+
+    <script>
+        let checkboxesEnabled = true;
+
+        function toggleCheckboxes() {
+            checkboxesEnabled = !checkboxesEnabled;
+            const checkboxes = document.querySelectorAll('.checkbox-container input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.disabled = !checkboxesEnabled; // Enable or disable checkboxes
+            });
+        }
+
+        function generatePassword() {
+            const length = document.getElementById('length').value;
+            const include_uppercase = document.getElementById('uppercase').checked;
+            const include_lowercase = document.getElementById('lowercase').checked;
+            const include_numbers = document.getElementById('numbers').checked;
+            const include_symbols = document.getElementById('symbols').checked;
+
+            fetch('/generate_password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    length: parseInt(length),
+                    include_uppercase,
+                    include_lowercase,
+                    include_numbers,
+                    include_symbols
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('password').innerText = data.password;
+                document.getElementById('result').style.display = 'none'; // Clear previous results
+            });
+        }
+
+        function promptCheckPassword() {
+            const password = prompt("Enter the password to check:");
+            if (password) {
+                checkPasswordStrength(password);
+            }
+        }
+
+        function checkPasswordStrength(password) {
+            fetch('/check_password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                displayResult(data.strength);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function displayResult(message) {
+            document.getElementById("modalResult").innerText = message;
+            document.getElementById("myModal").style.display = "block"; // Show the modal
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none"; // Hide the modal
+        }
+
+        function viewPasswordHistory() {
+            fetch('/view_history')
+            .then(response => response.json())
+            .then(data => {
+                const historyElement = document.getElementById('history');
+                historyElement.innerHTML = "<strong>Password History:</strong><br>";
+                data.history.forEach((password, index) => {
+                    historyElement.innerHTML += `${index + 1}. ${password}<br>`;
+                });
+                historyElement.style.display = 'block';
+            });
+        }
+
+        function clearPasswordHistory() {
+            if (confirm("Are you sure you want to clear the password history?")) {
+                fetch('/clear_history', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('history').innerHTML = "<strong>Password History:</strong><br>No passwords available.";
+                    alert("Password history cleared!");
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
